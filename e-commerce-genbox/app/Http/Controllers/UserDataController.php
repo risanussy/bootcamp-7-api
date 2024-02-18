@@ -46,6 +46,7 @@ class UserDataController extends Controller
             'nomor_telepon' => 'required|string',
             'jenis_kelamin' => 'required|string',
             'tanggal_lahir' => 'required|date',
+            'email' => 'required|string|email', 
         ]);
 
         $user = User::find($userId);
@@ -57,14 +58,21 @@ class UserDataController extends Controller
             ], 404);
         }
 
-        $profilToko = $user->profilToko()->create($validatedData);
+        $user->email = $validatedData['email']; 
+        $user->save();
+
+        $profilToko = $user->profilToko()->updateOrCreate([], $validatedData);
 
         return response()->json([
             'code' => 200,
-            'message' => 'Profil Toko berhasil dibuat',
-            'data' => $profilToko,
+            'message' => 'Profil Toko berhasil diperbarui',
+            'data' => [
+                'user' => $user->toArray(),
+                'profilToko' => $profilToko
+            ]
         ]);
     }
+
 
     public function data (){
         $data = User::all();
