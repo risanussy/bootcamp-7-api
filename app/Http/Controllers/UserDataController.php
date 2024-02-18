@@ -106,6 +106,7 @@ class UserDataController extends Controller
             ], 404);
         }
 
+
         return response()->json([
             'code' => 200,
             'message' => 'Berhasil mendapatkan data Profil Toko',
