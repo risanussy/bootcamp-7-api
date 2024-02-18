@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,7 @@ Route::post('user/create-store/{userId}', 'UserDataController@createStore');
 Route::get('user/get-data', 'UserDataController@data');
 // user get all data with store
 Route::get('user/profile-toko/{userId}', 'UserDataController@getDataWithProfile');
+
+Route::resource('api/carts', CartController::class);
+
+
