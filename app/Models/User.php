@@ -65,4 +65,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function profilToko()
+    {
+        return $this->hasMany(ProfilToko::class);
+    }
 }
